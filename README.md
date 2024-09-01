@@ -1,8 +1,10 @@
-# React + Vite
+Demo - https://ygn-chicago-time-converter.netlify.app/
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Tech
+- ReactJS
+- JavaScript
+- Flowbite
+- Flowbite DatePicker / TimePicker
 
-Currently, two official plugins are available:
+![YGN-to_Chicago](https://github.com/user-attachments/assets/90a22348-0ebf-46dc-92a2-c41abe6f6928)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
