@@ -1,23 +1,40 @@
 import React, { useState } from "react";
 import DatePicker from "./components/DatePicker";
 import DisplayDateTime from "./components/DisplayDateTime";
+import Header from "./components/Header";
+import LocationDropdown from "./components/LocationDropdown";
 import TimePicker from "./components/TimePicker";
 import { convertYangonToChicago } from "./helpers/YgnToChicagoFormat";
+import { convertChicagoToYangon } from "./helpers/ChicagoToYgnFormat";
 
 const App = () => {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
+
+  const [ygnLocation, setYgnLocation] = useState("Yangon to Chicago");
 
   const [ygnTime, setYgnTime] = useState("");
   const [chicagoTime, setChicagoTime] = useState("");
 
   const handleDateTime = () => {
     if (date && time) {
-      const inputDatetime = `${date} ${time}`;
-      const convertedDatetime = convertYangonToChicago(inputDatetime);
 
-      setYgnTime(inputDatetime);
-      setChicagoTime(convertedDatetime);
+
+      if (ygnLocation === "Yangon to Chicago") {
+        const inputDatetime = `${date} ${time}`;
+        const convertedDatetime = convertYangonToChicago(inputDatetime);
+
+        setYgnTime(inputDatetime);
+        setChicagoTime(convertedDatetime);
+      } 
+      
+      else {
+        const inputDatetime = `${date} ${time}`; // chicago
+        const convertedDatetime = convertChicagoToYangon(inputDatetime); // yangon
+
+        setYgnTime(convertedDatetime);
+        setChicagoTime(inputDatetime);
+      }
     }
 
     // console.log(
@@ -28,15 +45,18 @@ const App = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-blue-400">
+    <div className="flex flex-col gap-3 justify-center items-center h-screen bg-blue-400">
+      <div className="">
+        <LocationDropdown
+          ygnLocation={ygnLocation}
+          setYgnLocation={setYgnLocation}
+        />
+      </div>
+
       <div className="bg-yellow-50 w-[600px] h-[500px] rounded-lg flex flex-col">
-        <h3 className="mt-7 mb-3 font-semibold text-2xl text-center">
-          YGN to Chicago Date - Time Converter
-        </h3>
+        <Header ygnLocation={ygnLocation} />
 
-        <h5 className="text-center mb-5 text-gray-500 font-medium">{`YGN - Chicago Time Difference => ( minus 11 : 30 )`}</h5>
-
-        <div className="flex items-center justify-center gap-5 mt-3">
+        <div className="flex items-center justify-center gap-5 mt-2">
           <DatePicker date={date} setDate={setDate} />
           <TimePicker time={time} setTime={setTime} />
         </div>
@@ -48,7 +68,11 @@ const App = () => {
         </div>
 
         <div className="mt-3">
-          <DisplayDateTime ygnTime={ygnTime} chicagoTime={chicagoTime} />
+          <DisplayDateTime
+            ygnTime={ygnTime}
+            chicagoTime={chicagoTime}
+            ygnLocation={ygnLocation}
+          />
         </div>
       </div>
     </div>

@@ -23,8 +23,19 @@ export function formatDatetime(datetimeStr) {
     "December",
   ];
 
+  const dayNames = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
   // Extract date components
   const monthAbbr = monthNames[localDate.getMonth()];
+  const dayName = dayNames[localDate.getDay()];
   const dayOfMonth = localDate.getDate();
   const yearOfDate = localDate.getFullYear();
   let hours = localDate.getHours();
@@ -36,7 +47,7 @@ export function formatDatetime(datetimeStr) {
   hours = hours ? hours : 12; // the hour '0' should be '12'
 
   // Format the date as "Mon DD, YYYY HH:MM A.M/P.M"
-  const formattedDate = `${monthAbbr} ${String(dayOfMonth).padStart(
+  const formattedDate = `${dayName}, ${monthAbbr} ${String(dayOfMonth).padStart(
     2,
     "0"
   )}, ${yearOfDate} ${String(hours).padStart(2, "0")}:${minutes} ${ampm}`;

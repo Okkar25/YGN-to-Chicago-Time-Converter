@@ -28,9 +28,20 @@ export function convertYangonToChicago(datetimeStr) {
     "December",
   ];
 
+  const dayNames = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
   // Extract date components
   const monthName = monthNames[chicagoDate.getMonth()];
   const dayOfMonth = String(chicagoDate.getDate()).padStart(2, "0");
+  const dayName = dayNames[chicagoDate.getDay()];
   const yearOfDate = chicagoDate.getFullYear();
   let hours = chicagoDate.getHours();
   const minutes = String(chicagoDate.getMinutes()).padStart(2, "0");
@@ -41,7 +52,7 @@ export function convertYangonToChicago(datetimeStr) {
   hours = hours ? hours : 12; // the hour '0' should be '12'
 
   // Format the Chicago date as "Month Day, Year HH:MM A.M/P.M"
-  const formattedDate = `${monthName} ${dayOfMonth}, ${yearOfDate} ${String(
+  const formattedDate = `${dayName}, ${monthName} ${dayOfMonth}, ${yearOfDate} ${String(
     hours
   ).padStart(2, "0")}:${minutes} ${ampm}`;
 
